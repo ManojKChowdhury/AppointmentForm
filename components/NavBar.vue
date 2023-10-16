@@ -14,13 +14,9 @@
 
   <div id="navbarBasicExample" class="navbar-menu">
     <div class="navbar-start">
-      <a class="navbar-item">
-        Dashboard
-      </a>
-
-      <a class="navbar-item">
-        Services
-      </a>
+        
+      <NuxtLink class="navbar-item" to="/">Job Posting</NuxtLink>
+      <NuxtLink class="navbar-item" to="dashboard">Dashboard</NuxtLink>
 
       <div class="navbar-item has-dropdown is-hoverable">
         <a class="navbar-link">

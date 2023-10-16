@@ -1,5 +1,4 @@
 <template>
-  <nav-bar></nav-bar>
   <div class="main-wrapper">
     <div v-if="!hideNotification" class="notification is-primary">
       <button class="delete" @click="hideNotification = true"></button>
@@ -259,7 +258,7 @@ export default {
     showNotification() {
       this.message = `Added Job to records. Please wait while we review, A ${this.job.type} will contact you shortly.`
       this.hideNotification = false;
-      setTimeout(()=> this.hideNotification = false, 3000);
+      setTimeout(()=> this.hideNotification = true, 3000);
     },
     fillForm(){
       this.$data.contactInfo = {
@@ -272,7 +271,7 @@ export default {
           pincode: '452012',
         }
       }
-      this.$data.job.description = 'Need aNurse ';
+      this.$data.job.description = 'Need a Nurse for my mother';
       this.$data.job.services[0].name = 'Pregnancy Care';
     }
   }
