@@ -18,9 +18,9 @@
     "vue-router": "^4.2.5"
   },
   "dependencies": {
-    "bootstrap": "^5.3.2",
-    "bootstrap-vue": "^2.23.1",
+    "buefy": "^0.9.25",
     "bulma": "^0.9.4",
-    "nuxt-mongoose": "^1.0.2"
+    "nuxt-buefy": "^0.4.26",
+    "primevue": "^3.36.0"
   }
 }

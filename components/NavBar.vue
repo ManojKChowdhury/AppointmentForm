@@ -64,6 +64,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+@import url('bulma/css/bulma.min.css');
 
 </style>

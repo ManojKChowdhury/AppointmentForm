@@ -176,6 +176,8 @@
     </div>
   </div>
 </template>
+
+
     
 <script>
 import NavBar from '~/components/NavBar.vue'
@@ -278,7 +280,8 @@ export default {
 };
 </script>
     
-<style lang="scss">
+<style lang="scss" scoped>
+@import url('bulma/css/bulma.min.css');
 .main-wrapper {
   display: flex;
   flex-direction: column;

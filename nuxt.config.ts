@@ -2,17 +2,17 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   css: [
-    'bulma/css/bulma.min.css',
+    "primevue/resources/themes/lara-light-blue/theme.css"
   ],
   runtimeConfig:{
     public: {
-      baseUrl: 'https://api.sarathicareservices.com'
+      baseUrl: 'https://api.sarathicareservices.com/'
     },
   },
-  // plugins: [
-  //   '~/plugins/primeVue.js'
-  // ],
-	// build: {
-	// 	transpile: ["primevue"]
-	// }
+  plugins: [
+    '~/plugins/primeVue.js'
+  ],
+	build: {
+		transpile: ["primevue"]
+	}
 });
