@@ -9,10 +9,10 @@ export default defineNuxtConfig({
       baseUrl: 'https://api.sarathicareservices.com'
     },
   },
-  plugins: [
-    '~/plugins/primeVue.js'
-  ],
-	build: {
-		transpile: ["primevue"]
-	}
+  // plugins: [
+  //   '~/plugins/primeVue.js'
+  // ],
+	// build: {
+	// 	transpile: ["primevue"]
+	// }
 });
