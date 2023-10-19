@@ -6,7 +6,7 @@ export default defineNuxtConfig({
   ],
   runtimeConfig:{
     public: {
-      baseUrl: 'https://api.sarathicareservices.com/'
+      baseUrl: 'https://api.sarathicareservices.com'
     },
   },
   plugins: [
