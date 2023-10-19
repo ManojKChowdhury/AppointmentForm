@@ -6,8 +6,13 @@ export default defineNuxtConfig({
   ],
   runtimeConfig:{
     public: {
-      baseUrl: 'http://ec2-3-110-54-181.ap-south-1.compute.amazonaws.com:3005'
-    }
-  }
-
-})
+      baseUrl: 'https://api.sarathicareservices.com'
+    },
+  },
+  plugins: [
+    '~/plugins/primeVue.js'
+  ],
+	build: {
+		transpile: ["primevue"]
+	}
+});
