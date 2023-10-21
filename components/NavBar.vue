@@ -16,7 +16,7 @@
     <div class="navbar-start">
         
       <NuxtLink class="navbar-item" to="/">Job Posting</NuxtLink>
-      <NuxtLink class="navbar-item" to="dashboard">Dashboard</NuxtLink>
+      <NuxtLink class="navbar-item" to="dashboard">Jobs</NuxtLink>
 
       <div class="navbar-item has-dropdown is-hoverable">
         <a class="navbar-link">

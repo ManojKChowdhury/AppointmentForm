@@ -10,48 +10,49 @@
                 </div>
             </template> -->
             <Column expander style="width: 5rem" />
-            <Column field="name" header="Name"></Column>
-            <Column header="Image">
+            <Column field="description" header="Job Description"></Column>
+            <Column field="clientName" header="Client Name"></Column>
+            <Column field="clientAddress" header="Address">
                 <template #body="slotProps">
-                    <img :src="`https://primefaces.org/cdn/primevue/images/product/${slotProps.data.image}`" :alt="slotProps.data.image" class="shadow-4" width="64" />
+                    {{ formatAddress(slotProps.data.clientAddress) }}
                 </template>
             </Column>
-            <Column field="price" header="Price">
-                <template #body="slotProps">
-                    {{ formatCurrency(slotProps.data.price) }}
-                </template>
-            </Column>
-            <Column field="category" header="Category"></Column>
-            <Column field="rating" header="Reviews">
-                <template #body="slotProps">
-                    <Rating :modelValue="slotProps.data.rating" readonly :cancel="false" />
-                </template>
-            </Column>
+            <Column field="timeRequired" header="Time"></Column>
+            <Column field="jobDates" header="Date"></Column>
             <Column header="Status">
                 <template #body="slotProps">
-                    <Tag :value="slotProps.data.inventoryStatus" :severity="getSeverity(slotProps.data)" />
+                    <Tag :value="slotProps.data.jobStatus" :severity="getSeverity(slotProps.data)" />
                 </template>
             </Column>
             <template #expansion="slotProps">
                 <div class="p-3">
-                    <h5>Orders for {{ slotProps.data.name }}</h5>
-                    <DataTable :value="slotProps.data.orders" >
-                        <Column field="id" header="Id" sortable></Column>
-                        <Column field="customer" header="Customer" sortable></Column>
-                        <Column field="date" header="Date" sortable></Column>
-                        <Column field="amount" header="Amount" sortable>
+                    <h5>Nurse Appointments for {{ slotProps.data.clientName }} requirement</h5>
+                    <DataTable :value="slotProps.data.users" >
+                        <Column field="userId" header="Id" sortable></Column>
+                        <Column field="basicDetails" header="Name" sortable>
                             <template #body="slotProps">
-                                {{ formatCurrency(slotProps.data.amount) }}
+                                {{ formatName(slotProps.data.basicDetails) }}
                             </template>
                         </Column>
-                        <Column field="status" header="Status" sortable>
+                        <Column field="basicDetails.gender" header="Gender"></Column>
+                        <Column field="pincode" header="Pincode" sortable>
                             <template #body="slotProps">
-                                <Tag :value="slotProps.data.status.toLowerCase()" :severity="getOrderSeverity(slotProps.data)" />
+                                {{ formatPincode(slotProps.data.userAddress) }}
                             </template>
                         </Column>
-                        <Column headerStyle="width:4rem">
-                            <template #body>
-                                <Button icon="pi pi-search" />
+                        <Column field="educationHistory" header="Education" sortable>
+                            <template #body="slotProps">
+                              <Tag v-for="edu in slotProps.data.educationHistory" :value="formatEducation(edu)" />
+                            </template>
+                        </Column>
+                        <Column field="workExperience" header="Experience" sortable>
+                            <template #body="slotProps">
+                                <Tag v-for="exp in slotProps.data.workExperience" :value="formatWork(exp)" />
+                            </template>
+                        </Column>
+                        <Column field="userId" header="Approval" headerStyle="width:4rem">
+                            <template #body="slotProps">
+                                <Button @click="onApprove(slotProps.data.userId)">Approve</Button>
                             </template>
                         </Column>
                     </DataTable>
@@ -76,11 +77,14 @@ export default {
         ProductService.getProductsWithOrdersSmall().then((data) => (this.products = data));
     },
     methods: {
+        onApprove(userId){
+            console.log("Found User Id", userId)
+        },
         onRowExpand(event) {
-            this.$toast.add({ severity: 'info', summary: 'Product Expanded', detail: event.data.name, life: 3000 });
+            // this.$toast.add({ severity: 'info', summary: 'Product Expanded', detail: event.data.name, life: 3000 });
         },
         onRowCollapse(event) {
-            this.$toast.add({ severity: 'success', summary: 'Product Collapsed', detail: event.data.name, life: 3000 });
+            // this.$toast.add({ severity: 'success', summary: 'Product Collapsed', detail: event.data.name, life: 3000 });
         },
         expandAll() {
             this.expandedRows = this.products.filter((p) => p.id);
@@ -88,15 +92,30 @@ export default {
         collapseAll() {
             this.expandedRows = null;
         },
+        formatName(details) {
+            return `${details.firstName} ${details.lastName} `
+        },
+        formatAddress(userAddress) {
+            return `${userAddress.addressLine}, ${userAddress.city}, ${userAddress.pincode}`;
+        },
+        formatPincode(userAddress){
+           return userAddress?.postalCode; 
+        },
         formatCurrency(value) {
-            return value.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+            return value.toLocaleString('en-US', { style: 'currency', currency: 'INR' });
+        },
+        formatEducation({ degree, college }) {
+            return `${degree}, ${college}`;
+        },
+        formatWork({ jobTitle,  institute}){
+           return `${jobTitle}, ${institute}`;
         },
         getSeverity(product) {
-            switch (product.inventoryStatus) {
-                case 'INSTOCK':
+            switch (product.jobStatus) {
+                case 'Submitted':
                     return 'success';
 
-                case 'LOWSTOCK':
+                case 'Posted':
                     return 'warning';
 
                 case 'OUTOFSTOCK':

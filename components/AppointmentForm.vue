@@ -191,7 +191,7 @@ export default {
         description: '',
         type: 'Nurse',
         services: [
-          { name: '' },
+          { name: 'Pregnancy Care' },
         ],
         status: 'Posted',
       },
@@ -229,18 +229,10 @@ export default {
   methods: {
     async checkApi() {
       const resp = await fetch(this.baseUrl);
-      const data = await resp.json();
-      console.log(data);
+      return await resp.json();
     },
-    submitForm() {
-      console.log(this.$data.formData);
-      console.log(this.$data.job);
-      console.log(this.$data.contactInfo);
-      
-      api.postData(`${this.baseUrl}/jobs`,
-        {
-          ...this.job, ...this.contactInfo, ...this.formData
-        });
+    submitForm() { 
+      api.postData(`${this.baseUrl}/jobs`, { ...this.job, ...this.contactInfo, ...this.formData });
       this.resetFrom();
       this.showNotification();
     },
@@ -260,7 +252,7 @@ export default {
     showNotification() {
       this.message = `Added Job to records. Please wait while we review, A ${this.job.type} will contact you shortly.`
       this.hideNotification = false;
-      setTimeout(()=> this.hideNotification = true, 3000);
+      setTimeout(() => this.hideNotification = true, 3000);
     },
     fillForm(){
       this.$data.contactInfo = {
