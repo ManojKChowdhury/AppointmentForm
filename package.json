@@ -12,15 +12,18 @@
   "devDependencies": {
     "@nuxt/devtools": "latest",
     "nuxt": "^3.7.4",
+    "nuxt-primevue": "^0.0.3",
     "sass": "^1.69.0",
     "scss": "^0.2.4",
     "vue": "^3.3.4",
     "vue-router": "^4.2.5"
   },
   "dependencies": {
+    "@pinia/nuxt": "^0.5.1",
     "buefy": "^0.9.25",
     "bulma": "^0.9.4",
     "nuxt-buefy": "^0.4.26",
+    "primeflex": "^3.3.1",
     "primevue": "^3.36.0"
   }
 }
